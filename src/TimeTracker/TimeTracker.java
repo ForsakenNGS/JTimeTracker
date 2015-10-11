@@ -609,8 +609,9 @@ public class TimeTracker implements ActionListener, MouseListener {
 		} else if (event.getSource().equals(trayIconMenuSettings)) {
 			this.showSettingsWindow();
 		} else if (event.getSource().equals(trayIconMenuExit)) {
-			// TODO: Cleanup before exit!
-			System.exit(0);
+			if (windowMain.cleanup()) {
+				System.exit(0);
+			}
 		}
 	}
 
@@ -631,26 +632,22 @@ public class TimeTracker implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
+		// Nothing yet		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
+		// Nothing yet
 	}
 
 	@Override
 	public void mousePressed(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
+		// Nothing yet
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
+		// Nothing yet
 	}
 	
 }

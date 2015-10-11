@@ -41,13 +41,11 @@ public class TableTimeModel extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
 		return 4;
 	}
 
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
 		return taskTimeList.size();
 	}
 	

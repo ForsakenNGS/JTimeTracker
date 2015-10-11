@@ -207,5 +207,9 @@ public class MainWindow extends JFrame {
 			tableTasks.getSelectionModel().clearSelection();
 		}
 	}
+
+	public Boolean cleanup() {
+		return editTaskPanel.checkTaskSaved();
+	}
 	
 }

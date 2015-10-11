@@ -125,13 +125,12 @@ public class SettingsWindow extends JFrame implements ActionListener, ListSelect
 
 	@Override
 	public void windowActivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// Nothing yet
 	}
 
 	@Override
 	public void windowClosed(WindowEvent arg0) {
-		// TODO Auto-generated method stub
+		// Nothing yet
 	}
 
 	@Override
@@ -141,26 +140,22 @@ public class SettingsWindow extends JFrame implements ActionListener, ListSelect
 
 	@Override
 	public void windowDeactivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// Nothing yet		
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// Nothing yet
 	}
 
 	@Override
 	public void windowIconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// Nothing yet
 	}
 
 	@Override
 	public void windowOpened(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// Nothing yet
 	}
 	
 }
