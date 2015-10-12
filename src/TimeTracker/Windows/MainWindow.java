@@ -3,6 +3,8 @@ package TimeTracker.Windows;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Collections;
@@ -14,6 +16,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -37,22 +41,48 @@ public class MainWindow extends JFrame {
 	
 	private JTable					tableTasks;
 	private JScrollPane				tableTasksScroll;
-	private TableTaskModel				tableTasksModel;
+	private TableTaskModel			tableTasksModel;
 	private TaskPanel				editTaskPanel;
+	private JMenuBar				menuMain;
+	private JMenuItem				menuMainSettings;
+	private JMenuItem				menuMainExit;
 	
 	public MainWindow() {
 		super("TimeTracker v0.0.1 (Alpha version)");
+		JPanel panelTop = new JPanel(new BorderLayout());
+		// Main menu
+		menuMain = new JMenuBar();
+		menuMainSettings = new JMenuItem("Settings");
+		menuMainSettings.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TimeTracker.getInstance().showSettingsWindow();
+			}
+		});
+		menuMainExit = new JMenuItem("Exit");
+		menuMainExit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (MainWindow.this.cleanup()) {
+					System.exit(0);
+				}
+			}
+		});
+		menuMain.add(menuMainSettings);
+		menuMain.add(menuMainExit);
+		panelTop.add(menuMain, BorderLayout.NORTH);
 		// Title
 		JLabel labelHeading = new JLabel("Task list");
 		labelHeading.setFont(new Font("Arial", Font.BOLD, 20));
 		JPanel panelHeading = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		panelHeading.add(labelHeading);
+		panelTop.add(panelHeading, BorderLayout.CENTER);
 		// Create components
 		initTableTasks();
 		initPanelNew();
 		// Add components
 		setLayout(new BorderLayout());
-		add(panelHeading, BorderLayout.NORTH);
+		add(panelTop, BorderLayout.NORTH);
 		add(tableTasksScroll, BorderLayout.CENTER);
 		add(editTaskPanel, BorderLayout.SOUTH);
 		// Add state listener

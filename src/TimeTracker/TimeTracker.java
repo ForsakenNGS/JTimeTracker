@@ -1,11 +1,16 @@
 package TimeTracker;
+import java.awt.AWTEvent;
 import java.awt.AWTException;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
+import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.TrayIcon.MessageType;
+import java.awt.event.AWTEventListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -64,16 +69,18 @@ public class TimeTracker implements ActionListener, MouseListener {
 		// Synchronize tasks
 		ttInstance.syncTasks();
 		// Select newest task
-		ttInstance.setTaskActive( ttInstance.getTasks().firstElement() );
+		if (!ttInstance.getTasks().isEmpty()) {
+			ttInstance.setTaskActive( ttInstance.getTasks().firstElement() );
+		}
 	}
 
 	private MainWindow				windowMain;
 	private TaskTime.Status			status;
 	private SettingsWindow			windowSettings;
 	private TrayIcon				trayIcon;
-	private BufferedImage			trayIconImageDefault;
-	private BufferedImage			trayIconImageTracking;
-	private BufferedImage			trayIconImagePaused;
+	private Image					trayIconImageDefault;
+	private Image					trayIconImageTracking;
+	private Image					trayIconImagePaused;
 	private PopupMenu				trayIconMenu;
 	private MenuItem				trayIconMenuSync;
 	private MenuItem				trayIconMenuSettings;
@@ -138,9 +145,9 @@ public class TimeTracker implements ActionListener, MouseListener {
 
 	private void initSystemTrayIcon() {
 		try {
-			trayIconImageDefault = ImageIO.read(new File("images/taskbar.png"));
-			trayIconImageTracking = ImageIO.read(new File("images/taskbar_tracking.png"));
-			trayIconImagePaused = ImageIO.read(new File("images/taskbar_paused.png"));
+			trayIconImageDefault = Toolkit.getDefaultToolkit().getImage("images/taskbar.png");
+			trayIconImageTracking = Toolkit.getDefaultToolkit().getImage("images/taskbar_tracking.png");
+			trayIconImagePaused = Toolkit.getDefaultToolkit().getImage("images/taskbar_paused.png");
 			trayIconMenu = new PopupMenu();
 	        trayIcon = new TrayIcon(trayIconImageDefault, "TimeTracker");
 	        trayIcon.setImageAutoSize(true);
@@ -216,9 +223,6 @@ public class TimeTracker implements ActionListener, MouseListener {
 	        trayIcon.addMouseListener(this);
 	        // Add to system tray
 	        SystemTray.getSystemTray().add(trayIcon);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (AWTException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
